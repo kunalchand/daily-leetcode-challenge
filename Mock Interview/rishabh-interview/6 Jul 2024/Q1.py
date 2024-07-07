@@ -12,8 +12,20 @@ At least one horizontal or vertical cell separates between two battleships
 (i.e., there are no adjacent battleships).
 
 Example 1:
-    Input: board = [["X",".",".","X"],[".",".",".","X"],[".",".",".","X"]]
+    Input: board = 
+    [
+        [".","X",".","X"],
+        [".","X",".","X"],
+        ["X",".",".","X"]
+        
+        ]
+        3
+        
+        X 0
+        0 X
+        
     Output: 2
+    
 """
 
 import bisect
@@ -31,7 +43,36 @@ from itertools import combinations, pairwise, permutations, zip_longest
 from math import ceil, factorial, floor, inf, sqrt
 from typing import Deque, Dict, List, Optional, Set, Tuple, Union
 
+'''
+
+[".","X",".","X"],
+[".","X",".","X"],
+["X",".",".","X"]
+
+'''
 
 class Solution:
+    def neighbor_is_x(self, row: int, col: int, board: List[List[str]]) -> bool:
+        if board[row][col] == "X":
+            return True
+            
+        return False
+                
+    
     def countBattleships(self, board: List[List[str]]) -> int:
-        pass
+    
+        self.ROWS, self.COLS = len(board), len(board[0])
+        b_count = 0
+        
+        for r in range(self.ROWS):
+            for c in range(self.COLS):
+                if r-1 in range(self.ROWS) and c-1 in range(self.COLS):
+                    if self.neighbor_is_x(r - 1, c - 1, board):
+                        continue
+                if board[r][c] == "X":
+                    b_count += 1
+                
+            
+        return b_count        
+                        
+                        
