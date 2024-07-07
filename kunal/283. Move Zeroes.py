@@ -1,21 +1,20 @@
-"""
-Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
- 
-
-Example 1:
-
-Input: nums = [0,1,0,3,12]
-Output: [1,3,12,0,0]
-
-       Z
-[2,5,8,1,0,0,0,0,0,3,12]
-               N
-
-"""
-
-from typing import List
+import bisect
+import copy
+import heapq
+import math
+import random
+from bisect import bisect, bisect_left, bisect_right, insort, insort_left, insort_right
+from collections import Counter, defaultdict, deque
+from copy import deepcopy
+from dataclasses import dataclass
+from functools import cache, cmp_to_key, lru_cache, reduce
+from heapq import heapify, heappop, heappush, heappushpop
+from itertools import combinations, pairwise, permutations, zip_longest
+from math import ceil, factorial, floor, inf, sqrt
+from typing import Deque, Dict, List, Optional, Set, Tuple, Union
 
 
+# https://leetcode.com/problems/move-zeroes/
 class Solution:
     def moveZeroes(self, nums: List[int]) -> None:
         zero = -1

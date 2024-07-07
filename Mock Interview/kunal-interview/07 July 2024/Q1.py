@@ -1,4 +1,4 @@
-'''
+"""
 LC 543
 Given the root of a binary tree, return the length of the diameter of the tree.
 
@@ -11,7 +11,7 @@ Input: root = [1,2,3,4,5]
 Output: 3
 Explanation: 3 is the length of the path [4,2,1,3] or [5,2,1,3].
 
-'''
+"""
 
 # Definition for a binary tree node.
 from typing import Optional
@@ -22,6 +22,20 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
+
+
 class Solution:
-        def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-            pass
+    def traversal(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        else:
+            leftDepth = self.traversal(root.left)
+            rightDepth = self.traversal(root.right)
+            self.maxDiameter = max(self.maxDiameter, leftDepth + rightDepth)
+
+            return 1 + max(leftDepth, rightDepth)
+
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        self.maxDiameter = 0
+        self.traversal(root)
+        return self.maxDiameter
