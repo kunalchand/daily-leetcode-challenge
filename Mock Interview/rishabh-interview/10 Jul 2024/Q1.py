@@ -38,7 +38,23 @@ class TreeNode:
         self.left = left
         self.right = right
 
-
 class Solution:
     def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
-        pass
+        res, curr = [], []
+        
+        def dfs(node: Optional[TreeNode]) -> None:
+            if not node:
+                return
+            
+            curr.append(str(node.val))
+            
+            # leaf-node
+            if not node.left and not node.right:
+                res.append("->".join(curr.copy()))
+                
+            dfs(node.left)
+            dfs(node.right)
+            curr.pop()
+        
+        dfs(root)
+        return res
