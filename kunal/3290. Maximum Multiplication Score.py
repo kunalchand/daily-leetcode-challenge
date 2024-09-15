@@ -14,6 +14,7 @@ from math import ceil, factorial, floor, inf, sqrt
 from typing import Deque, Dict, List, Optional, Set, Tuple, Union
 
 
+# https://leetcode.com/problems/maximum-multiplication-score
 class Solution:
     # 2D DP TLE
     """
@@ -40,9 +41,9 @@ class Solution:
         dp = [[float("-inf") for _ in range(4)] for _ in range(len(b) + 1)]
 
         for i in range(1, len(dp)):
-            dp[i][3] = max(dp[i - 1][3], dp[i - 1][2] + b[i - 1] * a[3])
-            dp[i][2] = max(dp[i - 1][2], dp[i - 1][1] + b[i - 1] * a[2])
-            dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] + b[i - 1] * a[1])
             dp[i][0] = max(dp[i - 1][0], b[i - 1] * a[0])
+            dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] + b[i - 1] * a[1])
+            dp[i][2] = max(dp[i - 1][2], dp[i - 1][1] + b[i - 1] * a[2])
+            dp[i][3] = max(dp[i - 1][3], dp[i - 1][2] + b[i - 1] * a[3])
 
         return dp[len(dp) - 1][3]
